@@ -21,11 +21,13 @@ public class MySqlClienteDAO implements ClienteDAO{
 		try {
 			conn = MySqlDBConexion.getConexion();
 			
-			String sql = "insert into Cliente values(null,?,?,?)";
+			String sql = "insert into cliente values(null,?,?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombre());
 			pstm.setString(2, obj.getDni());
-			pstm.setInt(3, obj.getCategoria().getIdCategoria());
+			pstm.setTimestamp(3, obj.getFechaRegistro());
+			pstm.setInt(4, obj.getEstado());
+			pstm.setInt(5, obj.getCategoria().getIdCategoria());
 			
 			log.info(">>>> " + pstm);
 
@@ -41,5 +43,6 @@ public class MySqlClienteDAO implements ClienteDAO{
 		
 		return salida;
 	}
+
 	
 }
